@@ -46,6 +46,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d("SUJAN", "-- VIEW BUTTON CLICKED --");
         Intent intent = new Intent(MainActivity.this, ViewContactActivity.class);
         startActivity(intent);
-
     }
 }

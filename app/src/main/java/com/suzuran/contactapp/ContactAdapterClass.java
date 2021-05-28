@@ -41,25 +41,19 @@ public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClas
         holder.editText_name.setText(contact.getName());
         holder.editText_phone.setText(contact.getPhone());
 
-        holder.button_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = holder.editText_name.getText().toString();
-                String phone = holder.editText_phone.getText().toString();
-                dataBaseHelper.updateContact(new Contact(contact.getId(), name, phone));
-                notifyDataSetChanged();
-                ((Activity) context).finish();
-                context.startActivity(((Activity) context).getIntent());
-            }
+        holder.button_edit.setOnClickListener(v -> {
+            String name = holder.editText_name.getText().toString();
+            String phone = holder.editText_phone.getText().toString();
+            dataBaseHelper.updateContact(new Contact(contact.getId(), name, phone));
+            notifyDataSetChanged();
+            ((Activity) context).finish();
+            context.startActivity(((Activity) context).getIntent());
         });
 
-        holder.button_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dataBaseHelper.deleteContact(contact.getId());
-                contactList.remove(position);
-                notifyDataSetChanged();
-            }
+        holder.button_delete.setOnClickListener(v -> {
+            dataBaseHelper.deleteContact(contact.getId());
+            contactList.remove(position);
+            notifyDataSetChanged();
         });
     }
 
