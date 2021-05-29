@@ -2,6 +2,7 @@ package com.suzuran.contactapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         holder.editText_phone.setText(contact.getPhone());
 
         holder.button_edit.setOnClickListener(v -> {
+            Log.d("SUJAN", "-- EDIT BUTTON CLICKED --");
             String name = holder.editText_name.getText().toString();
             String phone = holder.editText_phone.getText().toString();
             dataBaseHelper.updateContact(new Contact(contact.getId(), name, phone));
@@ -54,6 +56,7 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         });
 
         holder.button_delete.setOnClickListener(v -> {
+            Log.d("SUJAN", "-- DELETE BUTTON CLICKED --");
             dataBaseHelper.deleteContact(contact.getId());
             contactList.remove(position);
             notifyDataSetChanged();
