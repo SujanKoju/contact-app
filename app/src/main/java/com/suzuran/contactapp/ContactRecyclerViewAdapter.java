@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClass.ViewHolder> {
+public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder> {
 
     List<Contact> contactList;
     Context context;
+
     DataBaseHelper dataBaseHelper;
 
-    public ContactAdapterClass(List<Contact> contactList, Context context) {
+    public ContactRecyclerViewAdapter(List<Contact> contactList, Context context) {
         this.contactList = contactList;
         this.context = context;
         this.dataBaseHelper = new DataBaseHelper(context);
@@ -28,6 +29,7 @@ public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClas
 
     @NonNull
     @Override
+    // TO TELL WHICH VIEW HOLDER TO SHOW REPEATEDLY ON THE RECYCLER VIEW
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.contact_list, parent, false);
@@ -35,7 +37,8 @@ public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClas
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContactAdapterClass.ViewHolder holder, int position) {
+    // What happens after we create view holder object
+    public void onBindViewHolder(@NonNull ContactRecyclerViewAdapter.ViewHolder holder, int position) {
         final Contact contact = contactList.get(position);
         holder.textViewId.setText(String.valueOf(contact.getId()));
         holder.editText_name.setText(contact.getName());
@@ -58,6 +61,7 @@ public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClas
     }
 
     @Override
+    //how many view holder objects to create ???
     public int getItemCount() {
         return contactList.size();
     }
@@ -76,5 +80,6 @@ public class ContactAdapterClass extends RecyclerView.Adapter<ContactAdapterClas
             button_edit = itemView.findViewById(R.id.button_edit);
             button_delete = itemView.findViewById(R.id.button_delete);
         }
+
     }
 }

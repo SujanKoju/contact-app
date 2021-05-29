@@ -10,6 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+
 public class MainActivity extends AppCompatActivity {
     EditText editTextName, editTextPhone;
     Button buttonAdd, buttonView;
@@ -19,11 +26,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //apiCallExample();
         editTextName = findViewById(R.id.edittext_name);
         editTextPhone = findViewById(R.id.edittext_phone);
 
         buttonAdd = findViewById(R.id.button_add);
-        buttonAdd = findViewById(R.id.button_view);
+        buttonView = findViewById(R.id.button_view);
+    }
+
+    //TO CALL API , WE USE VOLLEY LIBRARY LIKE THIS
+    private void apiCallExample() {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://jsonplaceholder.typicode.com/todos/2",
+                null, response -> {
+            try {
+                Toast.makeText(MainActivity.this, "-- API CALLED --  NAME : " + response.getString("title"), Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, error -> {
+
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 
     public void addButtonClicked(View view) {

@@ -18,15 +18,15 @@ RecyclerView recyclerView;
 
         recyclerView =findViewById(R.id.recyclerView_contacts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(ViewContactActivity.this);
         List<Contact> allContacts = dataBaseHelper.getAllContacts();
 
         if (allContacts.size()>0)
         {
-            ContactAdapterClass contactAdapterClass = new ContactAdapterClass(allContacts, ViewContactActivity.this);
-            recyclerView.setAdapter(contactAdapterClass);
+            ContactRecyclerViewAdapter contactRecyclerViewAdapter = new ContactRecyclerViewAdapter(allContacts, ViewContactActivity.this);
+            recyclerView.setAdapter(contactRecyclerViewAdapter);
         }
         else {
             Toast.makeText(this, "--- NO CONTACTS SAVED ---", Toast.LENGTH_SHORT).show();
