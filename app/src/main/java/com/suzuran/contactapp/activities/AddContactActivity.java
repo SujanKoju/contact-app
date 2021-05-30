@@ -1,8 +1,9 @@
-package com.suzuran.contactapp;
+package com.suzuran.contactapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,12 +14,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.suzuran.contactapp.Contact;
+import com.suzuran.contactapp.DataBaseHelper;
+import com.suzuran.contactapp.R;
 
 import org.json.JSONException;
 
 public class AddContactActivity extends AppCompatActivity {
     EditText editTextName, editTextPhone;
-    Button buttonAdd, buttonView;
+    Button buttonAdd, buttonView , buttonMediaSection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class AddContactActivity extends AppCompatActivity {
 
         buttonAdd = findViewById(R.id.button_add);
         buttonView = findViewById(R.id.button_view);
+        buttonMediaSection = findViewById(R.id.button_media);
 
         buttonAdd.setOnClickListener(v -> {
             Log.d("SUJAN", "-- ADD BUTTON CLICKED --");
@@ -52,9 +57,18 @@ public class AddContactActivity extends AppCompatActivity {
             Intent intent = new Intent(AddContactActivity.this, ViewContactActivity.class);
             startActivity(intent);
         });
+
+        buttonMediaSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SUJAN", "-- MEDIA SECTION BUTTON CLICKED --");
+                Intent intent = new Intent(AddContactActivity.this, MediaPlayerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    //TO CALL API , WE USE VOLLEY LIBRARY
+    //TODO TO CALL API , WE USE VOLLEY LIBRARY
     private void apiCallExample() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://jsonplaceholder.typicode.com/todos/2",

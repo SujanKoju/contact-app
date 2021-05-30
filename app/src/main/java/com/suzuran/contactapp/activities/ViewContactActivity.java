@@ -1,4 +1,4 @@
-package com.suzuran.contactapp;
+package com.suzuran.contactapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.suzuran.contactapp.Contact;
+import com.suzuran.contactapp.ContactRecyclerViewAdapter;
+import com.suzuran.contactapp.DataBaseHelper;
+import com.suzuran.contactapp.R;
 
 import java.util.List;
 
